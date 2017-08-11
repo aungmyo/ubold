@@ -1,2 +1,2 @@
-# ubold
-UBold Project
+
+Starter Template for My Project
