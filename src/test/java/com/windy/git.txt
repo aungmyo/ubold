@@ -1,28 +1,9 @@
-jpa branch>
-gid add *
-git commit -m "created the user service"
-git push
-
-develop branch>
-git checkout develop
-git merge jpa
-git push
-
-
-
-git status
-git add README.md
-git commit -m "Project guide to build"
-git push
-
 
 # Create new branch A
 git checkout -b A
-#
-touch A.txt
-git add A.txt
-git commit -m "Created new file A.txt"
-
+	touch A.txt
+	git add A.txt
+	git commit -m "Created new file A.txt"
 # Push local branch A to remote branch A
 git push -u origin A
 
@@ -36,22 +17,13 @@ git push -u origin A
 
 # create and switch to a new branch 'develop'
 git checkout -b develop
-
 # create remote branch 'develop'
 git push -u origin develop
-
-# create and switch to a new branch 'feature2'
-git checkout -b feature2
-#
-touch feature2.txt
-git add feature2.txt
-git commit -m "Created new file: feature2.txt"
-git push -u origin feature2
 
 #
 git checkout develop
 git pull
-git merge feature2
+git merge A
 git push
 
 #
