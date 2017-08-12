@@ -9,12 +9,12 @@ import java.io.Serializable;
 
 @Data
 @Entity
-public class User implements Serializable {
+public class Users implements Serializable {
 
 	/** The Serial Version UID for Serializable classes. */
 	private static final long serialVersionUID = 1L;
 
-	public User() {
+	public Users() {
 	}
 
 	@Id

@@ -25,7 +25,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 	/** Public URLs. */
-	private static final String[] PUBLIC_URLS = { "/", "/files/**" };
+	private static final String[] PUBLIC_URLS = { "/","/signup", "/files/**" };
 
 	// tag::dev[]
 	@Autowired

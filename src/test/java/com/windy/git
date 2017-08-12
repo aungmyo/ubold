@@ -7,3 +7,58 @@ develop branch>
 git checkout develop
 git merge jpa
 git push
+
+
+
+git status
+git add README.md
+git commit -m "Project guide to build"
+git push
+
+
+# Create new branch A
+git checkout -b A
+#
+touch A.txt
+git add A.txt
+git commit -m "Created new file A.txt"
+
+# Push local branch A to remote branch A
+git push -u origin A
+
+
+# Push local branch A to remote master branch
+/c/devopsbuddy (A) 	$ git checkout master	- switch local branch to local master
+/c/devopsbuddy (master) $ git pull		- update local master branch with latest update from remote master branch
+/c/devopsbuddy (master) $ git merge A		- merging branch A to local master branch, so that local master branch also contains 						  branch A features
+/c/devopsbuddy (master) $ git push		- push the local master to remote master
+
+
+# create and switch to a new branch 'develop'
+git checkout -b develop
+
+# create remote branch 'develop'
+git push -u origin develop
+
+# create and switch to a new branch 'feature2'
+git checkout -b feature2
+#
+touch feature2.txt
+git add feature2.txt
+git commit -m "Created new file: feature2.txt"
+git push -u origin feature2
+
+#
+git checkout develop
+git pull
+git merge feature2
+git push
+
+#
+git checkout master
+git pull
+git merge develop
+git push
+git tag "1.0.0.RELEASE" -m "Release v1.0.0"
+git push --tags
+

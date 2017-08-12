@@ -1,15 +1,15 @@
 package com.windy.persistence;
 
 import org.springframework.data.repository.CrudRepository;
-import com.windy.domain.User;
+import com.windy.domain.Users;
 
-public interface UserRepository extends CrudRepository<User, Long> {
+public interface UserRepository extends CrudRepository<Users, Long> {
 
 	// Iterable<User> findByUsernameIgnoringCase(String username);
 
-	User findByUsernameIgnoringCase(String username);
+	Users findByUsernameIgnoringCase(String username);
 
-	User findByEmail(String email);
+	Users findByEmail(String email);
 
 	// @Transactional
 	// @Modifying
