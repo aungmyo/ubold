@@ -7,21 +7,24 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class Main {
 
 /*	@Bean
-	public InitializingBean seedDatabase(CarRepository repository) {
+	public InitializingBean seedDatabase(UserRepository repository) {
 		return () -> {
-			repository.save(new Car("Honda", "Civic", 1997));
-			repository.save(new Car("Honda", "Accord", 2003));
-			repository.save(new Car("Ford", "Escort", 1985));
+			User user = new User();
+			user.setUsername("spring");
+			user.setPassword("b8ff599d21dd1f4f4631172a1fd2c561ccd254128208e88576aec785a0af3697015182dfd6020edc");
+			user.setEmail("aung@gmail.com");
+			user.setEnabled(true);
+			repository.save(user);
+			System.err.println(repository.findByUsername("spring").toString());
 		};
 	}
 
 	@Bean
-	public CommandLineRunner exampleQuery(CarRepository repository) {
+	public CommandLineRunner exampleQuery(UserRepository repository) {
 		return args -> repository.findByMakeIgnoringCase("HONDA").forEach(System.err::println);
 	}*/
 
 	public static void main(String[] args) {
 		SpringApplication.run(Main.class, args);
 	}
-
 }
