@@ -11,5 +11,5 @@ insert into groups(id, group_name) values(1, 'Admins');
 insert into group_authorities(group_id, authority) values(1, 'ROLE_USER');
 insert into group_authorities(group_id, authority) values(1, 'ROLE_ADMIN');
 
-insert into group_members(id, username, group_id) values(1, 'pivotal', 1);
-insert into group_members(id, username, group_id) values(2, 'spring', 1);
+-- insert into group_members(id, username, group_id) values(1, 'pivotal', 1);
+-- insert into group_members(id, username, group_id) values(2, 'spring', 1);

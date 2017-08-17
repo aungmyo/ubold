@@ -3,7 +3,7 @@ package com.windy.persistence;
 import org.springframework.data.repository.CrudRepository;
 import com.windy.domain.Users;
 
-public interface UserRepository extends CrudRepository<Users, Long> {
+public interface UserRepository extends CrudRepository<Users, String> {
 
 	// Iterable<User> findByUsernameIgnoringCase(String username);
 

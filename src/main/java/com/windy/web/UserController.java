@@ -3,22 +3,28 @@ package com.windy.web;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.windy.domain.Members;
 import com.windy.domain.Users;
+import com.windy.persistence.MemberRepository;
 import com.windy.persistence.UserRepository;
 
 @Controller
-public class LoginController {
+public class UserController {
 
-	private static final Logger log = LoggerFactory.getLogger(LoginController.class);
+	private static final Logger log = LoggerFactory.getLogger(UserController.class);
 
 	@Autowired
-	private UserRepository repo;
+	private UserRepository userRepository;
+	
+	@Autowired
+	private MemberRepository memberRepository;
 
 	@RequestMapping("/login-error")
 	public String loginError(Model model) {
@@ -33,20 +39,16 @@ public class LoginController {
 	 * */
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
 	public String signup(@ModelAttribute Users user) {
-		log.info("Invoke the signup form.");
-		log.info("User Name: " + user.getUsername());
-		log.info("Password: " + user.getPassword());
-		log.info("Email: " + user.getEmail());
-		
 //		User user= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		
-		user.setUsername("spring");
-		user.setPassword("b8ff599d21dd1f4f4631172a1fd2c561ccd254128208e88576aec785a0af3697015182dfd6020edc");
-		user.setEmail("aung@gmail.com");
-		user.isEnabled();
-		repo.save(user);
 
-		return "redirect:/";
+		StandardPasswordEncoder encoder = new StandardPasswordEncoder();
+		String encodedPassword = encoder.encode(user.getPassword());
+
+		userRepository.save(new Users(user.getUsername(), encodedPassword, user.getEmail(), true));
+		memberRepository.save(new Members(user.getUsername(), 1));
+
+		log.info("New account created.");
+		return "redirect:/home";
 	}
 
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)

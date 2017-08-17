@@ -2,7 +2,7 @@
 --drop table if exists users;
 --drop table if exists authorities;
 drop table if exists group_authorities;
-drop table if exists group_members;
+-- drop table if exists group_members;
 drop table if exists groups;
 
 
@@ -35,9 +35,10 @@ create table group_authorities (
 	constraint fk_group_authorities_group foreign key(group_id) references groups(id)
 );
 
+/*
 create table group_members (
 	id bigint NOT NULL PRIMARY KEY auto_increment,
 	username varchar(50) not null,
 	group_id bigint not null,
 	constraint fk_group_members_group foreign key(group_id) references groups(id)
-);
+);*/
