@@ -1,0 +1,26 @@
+
+public class Tag {
+	@NotNull
+	@Size(min = 1, max = 25)
+	private String tag;
+
+	@NotNull
+	@Size(max = 250)
+	private String description;
+
+	@ManyToMany(cascade = CascadeType.ALL)
+	private Set<Course> courses = new HashSet<Course>();
+}
+
+To define your Course to Tag mapping, you'll create another @ManyToMany relationship. 
+But this time you'll add the --mappedBy option so that you can define this as the inverse relationship. 
+An inverse relationship provides a way to navigate between entities.
+
+In a bidirectional many-to-many relationship, one side must be the primary, and the other side must be the inverse side.
+The inverse side is indicated here as Course, because it defines the mappedBy attribute.
+
+
+public class Course{
+	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "courses")
+	private Set<Tag> tags = new HashSet<Tag>();
+}

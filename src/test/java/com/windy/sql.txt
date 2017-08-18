@@ -1,4 +1,0 @@
-
-DELETE FROM 'ecommerce'.'users' WHERE 'username'='joshlong';
-DELETE FROM 'ecommerce'.'users' WHERE 'username'='pivotal';
-DELETE FROM 'ecommerce'.'users' WHERE 'username'='spring';

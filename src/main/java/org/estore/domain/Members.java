@@ -1,4 +1,4 @@
-package com.windy.domain;
+package org.estore.domain;
 
 import java.io.Serializable;
 
@@ -10,9 +10,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
+@NoArgsConstructor
 @Table(name = "group_members")
 public class Members implements Serializable {
 
@@ -27,9 +29,6 @@ public class Members implements Serializable {
 	private String username;
 
 	private int groupId;
-
-	public Members() {
-	};
 
 	public Members(String username, int groupId) {
 		super();

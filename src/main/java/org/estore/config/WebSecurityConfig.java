@@ -1,4 +1,4 @@
-package com.windy.config;
+package org.estore.config;
 
 import javax.sql.DataSource;
 import org.slf4j.Logger;

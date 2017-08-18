@@ -1,4 +1,4 @@
-package com.windy;
+package org.estore;
 
 import org.springframework.security.crypto.password.StandardPasswordEncoder;
 

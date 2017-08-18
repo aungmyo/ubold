@@ -1,0 +1,47 @@
+
+		Person
+
+Student				Instructor
+
+JPA needs additional information to map this hierarchy to a database. 
+JPA gives you three distinct ways to map an inheritance relationship: 
+	as a single table, 
+	a table for each child class, and
+	tables for all classes. (This is the fully database normalized version of the hierarchy. The JPA provider will create the parent and child tables 
+							for the relationship, and use SQL joins to fetch the data for a given entity.)
+
+
+
+On database engines that use an IDENTITY data type, such as MySQL, you can't use the AUTO key generation strategy.
+
+@Id
+@GeneratedValue(strategy = GenerationType.AUTO)
+private Long id;
+
+To fix this problem, change the key generation strategy. You can use another generation strategy, such as TABLE or SEQUENCE (with databases that support it).
+
+The TABLE strategy defines a table that keeps track of the next highest value for a given entity's primary key.
+
+The SEQUENCE strategy uses a high performance internal number sequence, which the database will increment automatically when creating the primary key. On databases that support sequences, you�ll get far higher performance by selecting the SEQUENCE strategy.
+
+@Id
+@GeneratedValue(strategy = GenerationType.TABLE)
+@Column(name = "id")
+private Long id;
+
+
+Whenever a student registers for a course, you enter a row in the registration table via the Registration entity:
+
+public class Registration {
+
+@ManyToOne
+private Student student;
+
+@ManyToOne
+private Course course;
+
+private boolean paymentMade;
+
+private boolean attended;
+
+}

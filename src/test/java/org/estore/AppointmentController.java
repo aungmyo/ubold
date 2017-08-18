@@ -1,4 +1,4 @@
-package com.windy;
+package org.estore;
 
 public class AppointmentController {
 

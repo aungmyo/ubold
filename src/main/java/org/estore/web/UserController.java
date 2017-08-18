@@ -1,5 +1,9 @@
-package com.windy.web;
+package org.estore.web;
 
+import org.estore.domain.Members;
+import org.estore.domain.Users;
+import org.estore.persistence.MemberRepository;
+import org.estore.persistence.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,11 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import com.windy.domain.Members;
-import com.windy.domain.Users;
-import com.windy.persistence.MemberRepository;
-import com.windy.persistence.UserRepository;
 
 @Controller
 public class UserController {

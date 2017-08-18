@@ -1,7 +1,7 @@
-package com.windy.persistence;
+package org.estore.persistence;
 
+import org.estore.domain.Users;
 import org.springframework.data.repository.CrudRepository;
-import com.windy.domain.Users;
 
 public interface UserRepository extends CrudRepository<Users, String> {
 

@@ -1,14 +1,19 @@
-package com.windy.domain;
+package org.estore.domain;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
 import java.io.Serializable;
 
 @Data
 @Entity
+@NoArgsConstructor
 public class Users implements Serializable {
 
 	/** The Serial Version UID for Serializable classes. */
@@ -18,22 +23,19 @@ public class Users implements Serializable {
 	@Column(unique = true)
 	private String username;
 
-	@Column(name = "password")
 	private String password;
 
-	@Column(unique = true)
+	@Column(unique = true, nullable = false)
 	private String email;
 
 	private String firstName;
 
 	private String lastName;
 
-	private String address;
+	@OneToOne(cascade = CascadeType.ALL)
+	private Address address;
 
 	private boolean enabled;
-
-	public Users() {
-	}
 
 	public Users(String username, String password, String email, boolean enabled) {
 		super();
@@ -43,12 +45,4 @@ public class Users implements Serializable {
 		this.enabled = enabled;
 	}
 
-/**	@JsonIgnore
-	@OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
-	private List<Appointment> appointments = new ArrayList<Appointment>();
-
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "USER_ID")
-	private Users user;
-*/
 }

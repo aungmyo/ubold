@@ -28,14 +28,11 @@
 
 		<div class="text-center" th:if="${param.error}">
 			<span class="text-danger">
-				Bad Credentials!
+				Wrong Username or Password!
 			</span>
 		</div>
 		<div class="text-center" th:if="${param.logout}">
 			<span class="text-center">You have been logged out.</span>
-		</div>
-		<div class="text-center" th:if="${param.signup}">
-			<span class="text-center">You account created successfully.</span>
 		</div>
 
 		<div class="card-box">
