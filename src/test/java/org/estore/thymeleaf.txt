@@ -1,0 +1,67 @@
+<span th:text="'Welcome , ' + ${user.name} + '!'">
+<span th:text="|Welcome , ${user.name}!|">
+
+<div th:if="${prodStat.count} &gt; 1">
+<span th:text="'Execution mode is ' + ( (${execMode} == 'dev')? 'Development' : 'Production')">
+
+<p th:utext="#{home.welcome(${session.user.name})}">
+		Welcome to our grocery store, Sebastian Pepper!
+</p>
+<!--
+	((User) ctx.getVariable("session").get("user")).getName();
+-->
+
+<p>Today is: <span th:text="${today}">13 February 2011</span></p>
+
+<img src="../../images/gtvglogo.png" th:src="@{/images/gtvglogo.png}" th:title="#{logo}" th:alt="#{logo}" />
+<img src="../../images/gtvglogo.png" th:src="@{/images/gtvglogo.png}" th:alt-title="#{logo}" />
+
+<form action="subscribe.html" th:action="@{/subscribe}">
+	<fieldset>
+		<input type="text" name="userName" value="Josh Long" th:value="${user.name}" />
+		<input type="text" name="email" />
+		<input type="submit" value="Subscribe!" th:value="#{subscribe.submit}"/>
+		<input type="button" value="Do it!" class="btn warning" />
+
+		<input type="checkbox" name="option2" checked /> <!-- HTML -->
+		<input type="checkbox" name="option1" checked="checked" /> <!-- XHTML -->
+		<input type="checkbox" name="active" th:checked="${user.active}" />
+
+	</fieldset>
+</form>
+
+<div th:object="${session.user}">
+	<p>Name: <span th:text="*{firstName}">Sebastian</span>.</p>
+   	<p>Surname: <span th:text="*{lastName}">Pepper</span>.</p>
+   	<p>Nationality: <span th:text="*{nationality}">Polish</span>.</p>
+   	<p>Age: <span th:text="*{age}?: '(no age specified)'">27</span>.</p>
+</div>
+<!-- 
+<div th:object="${session.user}">
+	<p>Name: <span th:text="${#object.firstName}">Sebastian</span>.</p>
+	<p>Surname: <span th:text="${session.user.lastName}">Pepper</span>.</p>
+	<p>Nationality: <span th:text="*{nationality}">Saturn</span>.</p>
+</div>
+-->
+
+<p>
+  <a href="home.html" th:href="@{/}">Return to home</a>
+</p>
+
+<p>Please select an option</p>
+<ol>
+	<li><a href="product/list.html" th:href="@{/product/list}">Product List</a></li>
+	<li><a href="order/list.html" th:href="@{/order/list}">Order List</a></li>
+	<li><a href="subscribe.html" th:href="@{/subscribe}">Subscribe to our Newsletter</a></li>
+	<li><a href="userprofile.html" th:href="@{/userprofile}">See User Profile</a></li>
+</ol>
+
+<ul th:if="${condition}">
+	<li th:each="u : ${users}" th:text="${u.name}">user name</li>
+</ul>
+
+<div th:switch="${user.role}">
+	<p th:case="'admin'">User is an administrator</p>
+	<p th:case="#{roles.manager}">User is a manager</p>
+	<p th:case="*">User is some other thing</p>
+</div>

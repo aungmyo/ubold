@@ -25,7 +25,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 	/** Public URLs. */
-	private static final String[] PUBLIC_URLS = { "/","/signup", "/files/**" };
+	private static final String[] PUBLIC_ENDPOINTS = { "/","/signup", "/files/**" };
 
 	// tag::dev[]
 	@Autowired
@@ -56,14 +56,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-				.antMatchers(PUBLIC_URLS).permitAll()
+				.antMatchers(PUBLIC_ENDPOINTS).permitAll()
 				.anyRequest().authenticated()
 			.and()
 				.requiresChannel()
 					.anyRequest().requiresSecure()
 			.and()
 				.formLogin().loginPage("/login").permitAll()
-				.defaultSuccessUrl("/home")
+				.defaultSuccessUrl("/dashboard")
 			.and()
 				.logout().permitAll();
 	}

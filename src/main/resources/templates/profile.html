@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="author" content="Coderthemes" />
+<link rel="shortcut icon" href="files/images/favicon.ico" />
+<title>Your account details</title>
+
+<link rel="stylesheet" type="text/css" href="files/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="files/css/core.css" />
+<link rel="stylesheet" type="text/css" href="files/css/components.css" />
+<link rel="stylesheet" type="text/css" href="files/css/icons.css" />
+<link rel="stylesheet" type="text/css" href="files/css/pages.css" />
+<link rel="stylesheet" type="text/css" href="files/css/menu.css" />
+<link rel="stylesheet" type="text/css" href="files/css/responsive.css" />
+
+<script src="files/js/modernizr.min.js"></script>
+
+</head>
+
+<body>
+
+	<!-- Navigation Bar-->
+	<header id="topnav">
+		<div class="topbar-main" th:replace="fragments/header :: header"></div>
+		<div class="navbar-custom" th:replace="fragments/menu :: menu"></div>
+	</header>
+	<!-- End Navigation Bar-->
+
+	<div class="wrapper">
+		<div class="container">
+
+			<!-- Page-Title -->
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="btn-group pull-right m-t-15">
+						<button type="button" class="btn btn-default dropdown-toggle waves-effect" data-toggle="dropdown" aria-expanded="false">
+							Settings <span class="m-l-5"><i class="fa fa-cog"></i></span>
+						</button>
+						<ul class="dropdown-menu drop-menu-right" role="menu">
+							<li><a href="#">Profile</a></li>
+							<li><a href="#">Change Password</a></li>
+							<li class="divider"></li>
+							<li><a href="#">Delete Account</a></li>
+						</ul>
+					</div>
+
+					<h4 class="page-title">Profile Details</h4>
+					<ol class="breadcrumb">
+						<li><a href="#">Ubold</a></li>
+						<li><a href="#">Account</a></li>
+						<li class="active">Details</li>
+					</ol>
+				</div>
+			</div>
+			<!-- end row -->
+
+			<footer class="footer text-right" th:replace="fragments/footer :: footer"></footer>
+
+		</div>
+		<!-- end container -->
+	</div>
+	<!-- end wrapper -->
+
+
+	<!-- jQuery  -->
+	<script src="files/js/jquery.min.js"></script>
+	<script src="files/js/bootstrap.min.js"></script>
+	<script src="files/js/detect.js"></script>
+	<script src="files/js/fastclick.js"></script>
+	<script src="files/js/jquery.slimscroll.js"></script>
+	<script src="files/js/jquery.blockUI.js"></script>
+	<script src="files/js/waves.js"></script>
+	<script src="files/js/wow.min.js"></script>
+	<script src="files/js/jquery.nicescroll.js"></script>
+	<script src="files/js/jquery.scrollTo.min.js"></script>
+
+	<!-- App core js -->
+	<script src="files/js/jquery.core.js"></script>
+	<script src="files/js/jquery.app.js"></script>
+
+</body>
+</html>

@@ -47,11 +47,12 @@ public class UserController {
 		memberRepository.save(new Members(user.getUsername(), 1));
 
 		log.info("New account created.");
-		return "redirect:/home";
+		return "redirect:/dashboard";
 	}
 
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)
 	public String signupForm() {
 		return "signup";
 	}
+
 }
