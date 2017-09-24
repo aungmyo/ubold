@@ -21,18 +21,57 @@ $(function(){
      name: 'username',
      title: 'Enter username'
    });
-    
+
     $('#firstname').editable({
       validate: function(value) {
        if($.trim(value) == '') return 'This field is required';
      }
    });
-    
+
+    $('#lastname').editable({
+      validate: function(value) {
+       if($.trim(value) == '') return 'This field is required';
+     }
+   });
+
+    $('#email').editable({
+      validate: function(value) {
+       if($.trim(value) == '') return 'This field is required';
+     }
+   });
+
+    $('#address').editable({
+      validate: function(value) {
+       if($.trim(value) == '') return 'This field is required';
+     }
+   });
+
     $('#sex').editable({
       prepend: "not selected",
       source: [
       {value: 1, text: 'Male'},
       {value: 2, text: 'Female'}
+      ],
+      display: function(value, sourceData) {
+       var colors = {"": "#98a6ad", 1: "#5fbeaa", 2: "#5d9cec"},
+       elem = $.grep(sourceData, function(o){return o.value == value;});
+
+       if(elem.length) {
+         $(this).text(elem[0].text).css("color", colors[value]);
+       } else {
+         $(this).empty();
+       }
+     }
+   });
+
+    $('#city').editable({
+      prepend: "not selected",
+      source: [
+      {value: 1, text: 'Yangon'},
+      {value: 2, text: 'Mandalay'},
+      {value: 3, text: 'Bago'},
+      {value: 4, text: 'Kachin'},
+      {value: 5, text: 'Shan'}
       ],
       display: function(value, sourceData) {
        var colors = {"": "#98a6ad", 1: "#5fbeaa", 2: "#5d9cec"},
@@ -58,8 +97,8 @@ $(function(){
       showbuttons: 'bottom'
     });
 
-    //inline
 
+    //inline
 
   $('#inline-username').editable({
      type: 'text',
