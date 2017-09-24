@@ -66,7 +66,7 @@
 
 					<li class="dropdown navbar-c-items">
                     	<a href="" class="dropdown-toggle waves-effect waves-light profile" data-toggle="dropdown" aria-expanded="true">
-                        	<img src="files/images/users/avatar-1.jpg" alt="user-img" class="img-circle" /> 
+                        	<img src="public/images/users/avatar-1.jpg" alt="user-img" class="img-circle" /> 
                         </a>
                         <ul class="dropdown-menu">
                         	<li>
@@ -79,14 +79,20 @@
                             		<i class="ti-user text-custom m-r-10"></i> Account
                             	</a>
                             </li>
+                            <li class="divider"></li>
                             <li>
+                            	<!-- 
                             	<form th:action="@{/logout}" method="post">
                             		<i>&nbsp;</i>
 	                            	<button type="submit" class="btn btn-link">
 	                            		<i class="glyphicon glyphicon-log-out m-r-10"></i>
 	                            		<span>Sign Out</span>
 	                            	</button>
-                            	</form>
+                            	</form> -->
+                            	<form th:action="@{/logout}" method="post">
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<input type="submit" class="btn btn-white btn-custom btn-rounded" value="Logout" />
+								</form>
                             </li>
                         </ul>
                     </li>
