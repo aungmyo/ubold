@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="A fully featured admin theme." />
+<meta name="author" content="Mr.Aung" />
+
+<link rel="shortcut icon" href="public/images/favicon.ico" />
+<title>Your account details</title>
+
+<script src="public/js/modernizr.min.js"></script>
+</head>
+
+<body>
+
+	<!-- Navigation Bar-->
+	<header id="topnav">
+		<div class="topbar-main" th:replace="fragments/header :: header"></div>
+		<div class="navbar-custom" th:replace="fragments/menu :: menu"></div>
+	</header>
+	<!-- End Navigation Bar-->
+
+	<div class="wrapper">
+		<div class="container">
+			
+			<div class="row">
+				<div class="col-sm-12">
+
+					<div class="col-md-8 col-lg-9">
+						<div class="card-box">
+							<div class="row">
+								<div class="col-lg-9">
+
+									<form th:action="@{/profile}" th:object="${account}" method="post" class="form-horizontal editor-horizontal">
+										<div class="form-group">
+											<label class="col-sm-3 control-label">Gender:</label>
+											<div class="col-sm-7">
+												<a href="#" id="sex" data-type="select" data-pk="1" data-value="" data-title="Select sex"></a>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-3 control-label">D.O.B:</label>
+											<div class="col-sm-7">
+												<a href="#" id="dob" data-type="combodate" data-value="1984-05-15" data-format="YYYY-MM-DD"
+													data-viewformat="DD/MM/YYYY" data-template="D / MMM / YYYY"
+													data-pk="1" data-title="Select Date of birth"></a>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-3 control-label">About Me:</label>
+											<div class="col-sm-7">
+												<a href="#" id="comments" data-type="textarea" data-pk="1" data-placeholder="Say something about yourself..."
+													data-title="Say something about yourself"></a>
+											</div>
+										</div>
+										<div class="m-t-30 text-center">
+											<button class="btn btn-default btn-custom btn-rounded waves-effect waves-light" type="submit" name="update" 
+												th:text="#{submit}">Save changes</button>
+										</div>
+									</form>
+
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<!-- end row -->
+			
+			<footer class="footer text-right" th:replace="fragments/footer :: footer"></footer>
+
+		</div>
+		<!-- end container -->
+	</div>
+	<!-- end wrapper -->
+
+</body>
+</html>

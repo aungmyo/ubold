@@ -11,7 +11,7 @@ import org.springframework.util.ResourceUtils;
 import java.io.FileNotFoundException;
 
 @Configuration
-public class SecureTomcatConfiguration {
+public class SecureTomcatConfig {
 
 	@Bean
 	public EmbeddedServletContainerFactory servletContainer() throws FileNotFoundException {

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="A fully featured admin theme." />
 <meta name="author" content="Mr.Aung" />
 
 <link rel="shortcut icon" href="public/images/favicon.ico" />
@@ -55,14 +55,222 @@
 				</div>
 			</div>
 			<!-- end row -->
+			
+			<div class="row">
+				<div class="col-sm-12">
 
+					<div class="col-md-4 col-lg-3">
+						<div class="profile-detail card-box">
+							<div>
+								<img th:src="@{/uploadedPicture}" class="img-circle" alt="profile-image" />
+								<div th:text="${error}" th:if="${error}">
+						            Error during upload
+						        </div>
+								<ul class="list-inline status-list m-t-20"></ul>
+								<form th:action="@{/profile}" method="post" enctype="multipart/form-data">
+						            <div class="btn waves-effect waves-light">
+						            	<input type="file" id="file" name="file" />
+						            </div>
+						            <button class="btn btn-pink btn-custom btn-rounded waves-effect waves-light" 
+						            	type="submit" name="upload" th:text="#{upload}">Upload</button>
+						        </form>
+								<hr />
+								<h4 class="text-uppercase font-600">About Me</h4>
+								<p class="text-muted font-13 m-b-30">
+									Hi I'm Johnathn Deo, has been the industry's standard dummy text ever since the 1500s.
+								</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-8 col-lg-9">
+						<div class="card-box">
+
+							<div class="row">
+								<div class="col-lg-9">
+									<h4 class="m-b-30 m-t-0"><b>Personal Info</b></h4>
+									<form th:object="${account}">
+										<div class="table-responsive m-t-20">
+											<table class="table">
+												<tbody>
+													<tr>
+														<td width="200"><label class="col-sm-7" for="name" th:text="#{name}">Name</label></td>
+														<td><span th:text="${account.username}"></span></td>
+													</tr>
+													<tr>
+														<td><label class="col-sm-7" for="firstname" th:text="#{firstname}">First Name</label></td>
+														<td><span th:text="${account.firstName}"></span></td>
+													</tr>
+													<tr>
+														<td><label class="col-sm-7" for="lastname" th:text="#{lastname}">Last Name</label></td>
+														<td><span th:text="${account.lastName}"></span></td>
+													</tr>
+													<tr>
+														<td><label class="col-sm-12" for="phone" th:text="#{phone}">Phone Number</label></td>
+														<td><span th:text="${account.phoneNumber}"></span></td>
+													</tr>
+													<tr>
+														<td><label class="col-sm-7" for="email" th:text="#{email}">Email</label></td>
+														<td><span th:text="${account.email}"></span></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+										<p></p>
+										<h4 class="m-b-30 m-t-0">
+											<b>Address</b>
+										</h4>
+										<div class="table-responsive m-t-20">
+											<table class="table">
+												<tbody>
+													<tr>
+														<td width="200"><label class="col-sm-7" for="address" th:text="#{address}">Address</label></td>
+														<td><span th:text="${account.address.address}"></span></td>
+													</tr>
+													<tr>
+														<td><label class="col-sm-7" for="city" th:text="#{city}">City</label></td>
+														<td><span th:text="${account.address.city}"></span></td>
+													</tr>
+													<tr>
+														<td><label class="col-sm-7" for="postcode" th:text="#{postcode}">PostCode</label></td>
+														<td><span th:text="${account.address.postalCode}"></span></td>
+													</tr>
+													<tr>
+														<td><label class="col-sm-7" for="state" th:text="#{state}">State</label></td>
+														<td><span th:text="${account.address.state}"></span></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</form>
+								</div>
+								<div class="btn-group pull-right">
+									<button class="btn btn-white btn-rounded waves-effect waves-light" data-toggle="modal" 
+										data-target="#con-close-modal" th:text="#{edit}">Edit</button>
+								</div>
+
+								<!-- profile edit form -->
+								<div id="con-close-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" 
+										aria-hidden="true" style="display: none;">
+									<div class="modal-dialog">
+										<div class="modal-content">
+
+										<!-- Your information has been saved. -->
+
+										<form th:action="@{/profile}" th:object="${account}" method="post">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+												<h4 class="modal-title">Profile Update Form:</h4>
+											</div>
+											<div class="modal-body">
+												<div class="row">
+													<div class="col-md-6">
+														<div class="form-group">
+															<label class="control-label" for="firstname" th:text="#{firstname}">First Name</label>
+															<input class="form-control" th:field="${account.firstName}" id="firstname" type="text" 
+																placeholder="First Name" />
+														</div>
+													</div>
+													<div class="col-md-6">
+														<div class="form-group">
+															<label class="control-label" for="lastname" th:text="#{lastname}">Last Name</label>
+															<input class="form-control" th:field="${account.lastName}" id="lastname" type="text" 
+																placeholder="Last Name" />
+														</div>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-md-12">
+														<div class="form-group">
+															<label class="control-label" for="phone" th:text="#{phone}">Phone Number</label>
+															<input class="form-control" th:field="${account.phoneNumber}" id="phone" type="text" 
+																placeholder="09-" />
+														</div>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-md-12">
+														<div class="form-group">
+															<label class="control-label" for="email" th:text="#{email}">Email</label>
+															<input class="form-control" th:field="${account.email}" id="email" type="email" 
+																placeholder="Email" required="required" />
+														</div>
+													</div>
+												</div>
+												<!-- (Password), (Re-type Password) -->
+												<!-- Birthdate	-	May 23, 1982 -->
+												<!-- Gender		-	Male -->
+												<div class="row">
+													<div class="col-md-12">
+														<div class="form-group">
+															<label class="control-label" for="address" th:text="#{address}">Address</label>
+															<input class="form-control" th:field="${account.address.address}" id="address" type="text" 
+																placeholder="Address" />
+														</div>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-md-4">
+														<div class="form-group">
+															<label class="control-label" for="city" th:text="#{city}">City</label>
+															<input class="form-control" th:field="${account.address.city}" id="city" type="text" 
+																placeholder="Brooklyn" />
+														</div>
+													</div>
+													<div class="col-md-4">
+														<div class="form-group">
+															<label class="control-label" for="postcode" th:text="#{postcode}">PostCode</label>
+															<input class="form-control" th:field="${account.address.postalCode}" id="postcode" type="text" 
+																placeholder="11231" />
+														</div>
+													</div>
+													<div class="col-md-4">
+														<div class="form-group">
+															<label class="control-label" for="state" th:text="#{state}">State/Province</label>
+															<input class="form-control" th:field="${account.address.state}" id="state" type="text" 
+																placeholder="New York" />
+														</div>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-md-12">
+														<div class="form-group no-margin">
+															<label class="control-label" for="biography" th:text="#{biography}">About Me</label>
+															<textarea class="form-control autogrow" th:field="${account.biography}" id="bio" 
+																placeholder="Write something about yourself" 
+																style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 104px;">
+															</textarea>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="modal-footer">
+												<button class="btn btn-default waves-effect" type="button" data-dismiss="modal">Close</button>
+												<button class="btn btn-info waves-effect waves-light" type="submit" name="update" th:text="#{update}">
+													Save changes
+												</button>
+											</div>
+										</form>
+
+										</div>
+									</div>
+								</div>
+								<!-- /.modal -->
+							</div>
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<!-- end row -->
+			
 			<footer class="footer text-right" th:replace="fragments/footer :: footer"></footer>
 
 		</div>
 		<!-- end container -->
 	</div>
 	<!-- end wrapper -->
-
 
 	<!-- jQuery  -->
 	<script src="public/js/jquery.min.js"></script>

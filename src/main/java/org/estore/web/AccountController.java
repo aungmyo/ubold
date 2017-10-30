@@ -1,9 +1,10 @@
 package org.estore.web;
 
 import org.estore.domain.Members;
-import org.estore.domain.Users;
+import org.estore.domain.Account;
+import org.estore.domain.Address;
 import org.estore.persistence.MemberRepository;
-import org.estore.persistence.UserRepository;
+import org.estore.persistence.AccountRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class UserController {
+public class AccountController {
 
-	private static final Logger log = LoggerFactory.getLogger(UserController.class);
+	private static final Logger log = LoggerFactory.getLogger(AccountController.class);
 
 	@Autowired
-	private UserRepository userRepository;
+	private AccountRepository accountRepository;
 	
 	@Autowired
 	private MemberRepository memberRepository;
@@ -37,14 +38,25 @@ public class UserController {
 	 * @Secured("ROLE_ADMIN")
 	 * */
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
-	public String signup(@ModelAttribute Users user) {
-//		User user= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
+	public String signup(@ModelAttribute Account account) {
 		StandardPasswordEncoder encoder = new StandardPasswordEncoder();
-		String encodedPassword = encoder.encode(user.getPassword());
+		String encodedPassword = encoder.encode(account.getPassword());
 
-		userRepository.save(new Users(user.getUsername(), encodedPassword, user.getEmail(), true));
-		memberRepository.save(new Members(user.getUsername(), 1));
+//		if (accountRepository.findByEmail(user.getEmail()) != null) {
+//			throws EmailExistException;
+//		}
+
+		Account user = new Account();
+		user.setUsername(account.getUsername());
+		user.setPassword(encodedPassword);
+		user.setEmail(account.getEmail());
+		user.setEnabled(true);
+
+		Address address = new Address("No.506, Zabuthiri 1st", "Thaketa", "11231", "Yangon", user);
+		user.setAddress(address);
+
+		accountRepository.save(user);
+		memberRepository.save(new Members(account.getUsername(), 1));
 
 		log.info("New account created.");
 		return "redirect:/dashboard";

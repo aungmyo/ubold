@@ -20,15 +20,23 @@ public class Address implements Serializable {
 	@GeneratedValue
 	private Long id;
 
-	private String postalCode;
-
-	private String stateCode;
+	private String address;
 
 	private String city;
 
-	private String address;
+	private String postalCode;
+
+	private String state;
 
 	@OneToOne
-	private Users user;
+	private Account account;
 
+	public Address(String address, String city, String postalCode, String state, Account account) {
+		super();
+		this.address = address;
+		this.city = city;
+		this.postalCode = postalCode;
+		this.state = state;
+		this.account = account;
+	}
 }
