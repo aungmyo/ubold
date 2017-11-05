@@ -3,6 +3,7 @@ package org.estore.web;
 import org.estore.config.ProfileSessionConfig;
 import org.estore.domain.Account;
 import org.estore.persistence.AccountRepository;
+import org.estore.persistence.AddressRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +21,15 @@ public class ProfilesController {
 	private static final Logger log = LoggerFactory.getLogger(ProfilesController.class);
 	private ProfileSessionConfig profileSession;
 	private AccountRepository accountRepository;
+	private AddressRepository addressRepository;
 	private String photo;
 
 	@Autowired
-	public ProfilesController(ProfileSessionConfig profileSession, AccountRepository accountRepository) {
+	public ProfilesController(ProfileSessionConfig profileSession, AccountRepository accountRepository,
+					AddressRepository addressRepo) {
 		this.profileSession = profileSession;
 		this.accountRepository = accountRepository;
+		this.addressRepository = addressRepo;
 	}
 
 	@ModelAttribute
@@ -50,17 +54,14 @@ public class ProfilesController {
 			photo = "pictures/" + profileSession.getPicturePath().getFilename();
 			log.info("picturePath: " + photo);
 		}
-		log.info("First Name: " + account.getFirstName());
-		log.info("Last Name: " + account.getLastName());
-		log.info("Phone: " + account.getPhoneNumber());
-		log.info("Email: " + account.getEmail());
-		log.info("Address: " + account.getAddress().getAddress());
-		log.info("City: " + account.getAddress().getCity());
-		log.info("PostCode: " + account.getAddress().getPostalCode());
-		log.info("State: " + account.getAddress().getState());
-		log.info("About Me: " + account.getBiography());
-//		accountRepository.updateProfile(profileSession.getUserName(), account.getEmail());
-//		log.info("Your information has been saved.");
+
+		accountRepository.updateProfile(profileSession.getUserName(), account.getEmail(), account.getFirstName(),
+				account.getLastName(), photo, account.getBiography(), account.getPhoneNumber());
+
+		addressRepository.updateAddress(profileSession.getId(), account.getAddress().getAddress(),
+				account.getAddress().getCity(), account.getAddress().getPostalCode(), account.getAddress().getState());
+
+		log.info("Your information has been saved.");
 
 		profileSession.updateForm(account);
 		return "redirect:/profile";

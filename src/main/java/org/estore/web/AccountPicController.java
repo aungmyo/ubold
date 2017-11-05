@@ -4,6 +4,7 @@ import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.estore.config.PictureConfig;
 import org.estore.config.ProfileSessionConfig;
 import org.estore.domain.Account;
+import org.estore.persistence.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.core.io.FileSystemResource;
@@ -29,20 +30,24 @@ public class AccountPicController {
 	private final Resource anonymousPicture;
 	private final MessageSource messageSource;
 	private final ProfileSessionConfig profileSession;
+	private AccountRepository accountRepository;
 	private String profilePic;
 
 	@Autowired
 	public AccountPicController(PictureConfig pictureConfig, MessageSource messageSource,
-								   ProfileSessionConfig profileSession) {
+			ProfileSessionConfig profileSession, AccountRepository accountRepo) {
 		uploadPath = pictureConfig.getUploadPath();
 		anonymousPicture = pictureConfig.getAnonymousPicture();
 		this.messageSource = messageSource;
 		this.profileSession = profileSession;
+		this.accountRepository = accountRepo;
 	}
 
 	@RequestMapping(value = "/uploadedPicture")
 	public void getUploadedPicture(HttpServletResponse response) throws IOException {
-		profilePic = "pictures/pic1992877118091859605.jpg";
+		Account profile = new Account();
+		profile = accountRepository.findByUsernameIgnoringCase(profileSession.getUserName());
+		profilePic = profile.getPhoto();
 		Resource sessionPic = profileSession.getPicturePath();
 		if (sessionPic == null) {
 			if (profilePic == null) {

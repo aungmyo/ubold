@@ -10,7 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Entity
+@Entity(name = "address")
 @NoArgsConstructor
 public class Address implements Serializable {
 
@@ -28,7 +28,7 @@ public class Address implements Serializable {
 
 	private String state;
 
-	@OneToOne
+	@OneToOne(mappedBy="address")
 	private Account account;
 
 	public Address(String address, String city, String postalCode, String state, Account account) {

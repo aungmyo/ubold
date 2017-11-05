@@ -67,18 +67,18 @@
 						            Error during upload
 						        </div>
 								<ul class="list-inline status-list m-t-20"></ul>
-								<form th:action="@{/profile}" method="post" enctype="multipart/form-data">
+								<form th:action="@{/profile}" method="post" th:object="${account}" enctype="multipart/form-data">
 						            <div class="btn waves-effect waves-light">
 						            	<input type="file" id="file" name="file" />
 						            </div>
 						            <button class="btn btn-pink btn-custom btn-rounded waves-effect waves-light" 
 						            	type="submit" name="upload" th:text="#{upload}">Upload</button>
-						        </form>
-								<hr />
-								<h4 class="text-uppercase font-600">About Me</h4>
-								<p class="text-muted font-13 m-b-30">
-									Hi I'm Johnathn Deo, has been the industry's standard dummy text ever since the 1500s.
-								</p>
+									<hr />
+									<h4 class="text-uppercase font-600">About Me</h4>
+									<p class="text-muted font-13 m-b-30">
+										<span th:text="${account.biography}"></span>
+									</p>
+								</form>
 							</div>
 						</div>
 					</div>
@@ -236,7 +236,7 @@
 													<div class="col-md-12">
 														<div class="form-group no-margin">
 															<label class="control-label" for="biography" th:text="#{biography}">About Me</label>
-															<textarea class="form-control autogrow" th:field="${account.biography}" id="bio" 
+															<textarea class="form-control autogrow" th:field="${account.biography}" id="biography" 
 																placeholder="Write something about yourself" 
 																style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 104px;">
 															</textarea>

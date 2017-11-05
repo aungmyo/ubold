@@ -34,6 +34,7 @@ public class ProfileSessionConfig implements Serializable {
 	private String lastname;
 	private String phone;
 	private String email;
+	private String biography;
 	private URL picturePath;
 	private boolean updateFlag;
 
@@ -44,6 +45,7 @@ public class ProfileSessionConfig implements Serializable {
 		this.lastname = account.getLastName();
 		this.phone = account.getPhoneNumber();
 		this.email = account.getEmail();
+		this.biography = account.getBiography();
 		this.address = account.getAddress();
 		this.updateFlag = true;
 	}
@@ -55,6 +57,7 @@ public class ProfileSessionConfig implements Serializable {
 			this.lastname = profile.getLastName();
 			this.phone= profile.getPhoneNumber();
 			this.email = profile.getEmail();
+			this.biography = profile.getBiography();
 			this.address = profile.getAddress();
 		}
 
@@ -64,8 +67,13 @@ public class ProfileSessionConfig implements Serializable {
 		account.setLastName(lastname);
 		account.setPhoneNumber(phone);
 		account.setEmail(email);
+		account.setBiography(biography);
 		account.setAddress(address);
 		return account;
+	}
+
+	public Long getId(){
+		return address.getId();
 	}
 
 	public void setPicturePath(Resource picturePath) throws IOException {

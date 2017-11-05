@@ -4,13 +4,14 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-
-import java.io.Serializable;
 
 @Data
 @Entity(name = "users")
@@ -49,6 +50,7 @@ public class Account implements Serializable {
 	private String biography;
 
 	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="address_id")
 	private Address address;
 
 	private boolean enabled;

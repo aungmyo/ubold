@@ -25,7 +25,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 	/** Public URLs. */
-	private static final String[] PUBLIC_ENDPOINTS = { "/","/signup", "/public/**" };
+	private static final String[] PUBLIC_ENDPOINTS = { "/", "/signup", "/public/**" };
 
 	// tag::dev[]
 	@Autowired

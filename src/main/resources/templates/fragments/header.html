@@ -15,10 +15,8 @@
 			</div>
 			<!-- End Logo container-->
 
-
 			<div class="menu-extras">
 				<ul class="nav navbar-nav navbar-right pull-right">
-
 					<li class="navbar-c-items">
 						<form role="search" class="navbar-left app-search pull-left hidden-xs">
 							<input type="text" placeholder="Search..." class="form-control" />
@@ -66,7 +64,7 @@
 
 					<li class="dropdown navbar-c-items">
                     	<a href="" class="dropdown-toggle waves-effect waves-light profile" data-toggle="dropdown" aria-expanded="true">
-                        	<img src="public/images/users/avatar-1.jpg" alt="user-img" class="img-circle" /> 
+                        	<img th:src="@{/uploadedPicture}" alt="user-img" class="img-circle" />
                         </a>
                         <ul class="dropdown-menu">
                         	<li>
