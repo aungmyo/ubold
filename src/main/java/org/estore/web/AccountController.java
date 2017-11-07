@@ -52,7 +52,7 @@ public class AccountController {
 		user.setEmail(account.getEmail());
 		user.setEnabled(true);
 
-		Address address = new Address("No.506, Zabuthiri 1st", "Thaketa", "11231", "Yangon", user);
+		Address address = new Address("", "", "", "", user);
 		user.setAddress(address);
 
 		accountRepository.save(user);

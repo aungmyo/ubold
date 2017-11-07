@@ -72,10 +72,6 @@ public class ProfileSessionConfig implements Serializable {
 		return account;
 	}
 
-	public Long getId(){
-		return address.getId();
-	}
-
 	public void setPicturePath(Resource picturePath) throws IOException {
 		this.picturePath = picturePath.getURL();
 	}

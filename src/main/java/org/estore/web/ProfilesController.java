@@ -3,7 +3,6 @@ package org.estore.web;
 import org.estore.config.ProfileSessionConfig;
 import org.estore.domain.Account;
 import org.estore.persistence.AccountRepository;
-import org.estore.persistence.AddressRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,15 +20,12 @@ public class ProfilesController {
 	private static final Logger log = LoggerFactory.getLogger(ProfilesController.class);
 	private ProfileSessionConfig profileSession;
 	private AccountRepository accountRepository;
-	private AddressRepository addressRepository;
 	private String photo;
 
 	@Autowired
-	public ProfilesController(ProfileSessionConfig profileSession, AccountRepository accountRepository,
-					AddressRepository addressRepo) {
+	public ProfilesController(ProfileSessionConfig profileSession, AccountRepository accountRepository) {
 		this.profileSession = profileSession;
 		this.accountRepository = accountRepository;
-		this.addressRepository = addressRepo;
 	}
 
 	@ModelAttribute
@@ -55,11 +51,24 @@ public class ProfilesController {
 			log.info("picturePath: " + photo);
 		}
 
-		accountRepository.updateProfile(profileSession.getUserName(), account.getEmail(), account.getFirstName(),
-				account.getLastName(), photo, account.getBiography(), account.getPhoneNumber());
+		Account user = accountRepository.findByUsernameIgnoringCase(profileSession.getUserName());
 
-		addressRepository.updateAddress(profileSession.getId(), account.getAddress().getAddress(),
-				account.getAddress().getCity(), account.getAddress().getPostalCode(), account.getAddress().getState());
+		user.setFirstName(account.getFirstName());
+		user.setLastName(account.getLastName());
+		user.setPhoneNumber(account.getPhoneNumber());
+		user.setEmail(account.getEmail());
+
+		if (photo != null) {
+			user.setPhoto(photo);
+		}
+		user.setBiography(account.getBiography());
+
+		user.getAddress().setAddress(account.getAddress().getAddress());
+		user.getAddress().setCity(account.getAddress().getCity());
+		user.getAddress().setPostalCode(account.getAddress().getPostalCode());
+		user.getAddress().setState(account.getAddress().getState());
+
+		accountRepository.save(user);
 
 		log.info("Your information has been saved.");
 
