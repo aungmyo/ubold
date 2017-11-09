@@ -2,15 +2,18 @@ package org.estore.web;
 
 import org.estore.config.ProfileSessionConfig;
 import org.estore.domain.Account;
+import org.estore.domain.Profile;
 import org.estore.persistence.AccountRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
 
@@ -38,6 +41,27 @@ public class ProfilesController {
 	@RequestMapping("/profile")
 	public String displayProfile(Account profileForm) {
 		return "profile";
+	}
+
+	@RequestMapping(value = "/jsonprofile", produces = { MediaType.APPLICATION_JSON_VALUE })
+	public @ResponseBody Profile getProfile() {
+
+		Account account = accountRepository.findByUsernameIgnoringCase(profileSession.getUserName());
+
+		Profile jsonProfile = new Profile();
+
+		jsonProfile.setUserName(account.getUsername());
+		jsonProfile.setFirstName(account.getFirstName());
+		jsonProfile.setLastName(account.getLastName());
+		jsonProfile.setPhoneNo(account.getPhoneNumber());
+		jsonProfile.setEmail(account.getEmail());
+
+		jsonProfile.setAddress(account.getAddress().getAddress());
+		jsonProfile.setCity(account.getAddress().getCity());
+		jsonProfile.setPostCode(account.getAddress().getPostalCode());
+		jsonProfile.setState(account.getAddress().getState());
+
+		return jsonProfile;
 	}
 
 	@RequestMapping(value = "/profile", params = { "update" }, method = RequestMethod.POST)
